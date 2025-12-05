@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>DataHub ВУЗов Казахстана</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        <h1>DataHub ВУЗов Казахстана</h1>
+        <p class="subtitle">Каталог · Информация · Сравнение</p>
+    </div>
+
+    <nav>
+        <a onclick="showSection('list')">Все университеты</a>
+        <a onclick="showSection('compare')">Сравнение</a>
+    </nav>
+</header>
+
+<!-- СПИСОК ВУЗОВ -->
+<section id="list">
+    <h2>Каталог университетов</h2>
+    <div id="university-list" class="grid"></div>
+</section>
+
+<!-- ОДИН УНИВЕРСИТЕТ -->
+<section id="university" class="hidden">
+    <button class="btn back" onclick="showSection('list')">← Назад</button>
+    <h2 id="uni-name"></h2>
+
+    <div class="uni-block">
+
+        <div class="card">
+            <h3>1. Об университете</h3>
+            <p id="uni-overview"></p>
+        </div>
+
+        <div class="card">
+            <h3>2. Академические программы</h3>
+            <ul id="uni-programs"></ul>
+        </div>
+
+        <div class="card">
+            <h3>3. Стоимость обучения</h3>
+            <p id="uni-tuition"></p>
+        </div>
+
+        <div class="card">
+            <h3>4. Стипендии и гранты</h3>
+            <ul id="uni-scholarships"></ul>
+        </div>
+
+        <div class="card">
+            <h3>5. Приём и поступление</h3>
+            <p id="uni-admission"></p>
+        </div>
+
+        <div class="card">
+            <h3>6. Международное сотрудничество</h3>
+            <p id="uni-international"></p>
+        </div>
+    </div>
+
+    <button class="btn" onclick="addToCompare()">Добавить к сравнению</button>
+</section>
+
+<!-- СРАВНЕНИЕ -->
+<section id="compare" class="hidden">
+    <button class="btn back" onclick="showSection('list')">← Назад</button>
+    <h2>Сравнение университетов</h2>
+    <div id="compare-table"></div>
+</section>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
