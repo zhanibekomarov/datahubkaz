@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<title>DataHub ВУЗов Казахстана</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>DataHub ВУЗов Казахстана</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
@@ -13,20 +12,18 @@
         <h1>DataHub ВУЗов Казахстана</h1>
         <p class="subtitle">Каталог · Информация · Сравнение</p>
     </div>
-
     <nav>
         <a onclick="showSection('list')">Все университеты</a>
         <a onclick="showSection('compare')">Сравнение</a>
     </nav>
 </header>
 
-<!-- СПИСОК ВУЗОВ -->
 <section id="list">
     <h2>Каталог университетов</h2>
+    <input type="text" id="search" placeholder="🔍 Поиск университета..." oninput="filterUniversities()">
     <div id="university-list" class="grid"></div>
 </section>
 
-<!-- ОДИН УНИВЕРСИТЕТ -->
 <section id="university" class="hidden">
     <button class="btn back" onclick="showSection('list')">← Назад</button>
     <h2 id="uni-name"></h2>
@@ -49,12 +46,12 @@
         </div>
 
         <div class="card">
-            <h3>4. Стипендии и гранты</h3>
+            <h3>4. Стипендии</h3>
             <ul id="uni-scholarships"></ul>
         </div>
 
         <div class="card">
-            <h3>5. Приём и поступление</h3>
+            <h3>5. Поступление</h3>
             <p id="uni-admission"></p>
         </div>
 
@@ -62,12 +59,17 @@
             <h3>6. Международное сотрудничество</h3>
             <p id="uni-international"></p>
         </div>
+
+        <div class="card">
+            <h3>7. Официальный сайт</h3>
+            <a id="uni-website-link" class="website-btn" href="#" target="_blank">🌐 Перейти на официальный сайт</a>
+        </div>
+
     </div>
 
     <button class="btn" onclick="addToCompare()">Добавить к сравнению</button>
 </section>
 
-<!-- СРАВНЕНИЕ -->
 <section id="compare" class="hidden">
     <button class="btn back" onclick="showSection('list')">← Назад</button>
     <h2>Сравнение университетов</h2>
@@ -76,6 +78,5 @@
 
 <script src="data.js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>

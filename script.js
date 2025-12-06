@@ -1,6 +1,7 @@
 let compareList = [];
 let currentUniversity = null;
 
+// Переключение секций
 function showSection(id) {
     ["list", "university", "compare"].forEach(s =>
         document.getElementById(s).classList.add("hidden")
@@ -10,6 +11,7 @@ function showSection(id) {
     if (id === "compare") updateComparison();
 }
 
+// Генерация списка карточек
 const list = document.getElementById("university-list");
 
 universities.forEach(u => {
@@ -20,6 +22,7 @@ universities.forEach(u => {
     list.appendChild(card);
 });
 
+// Открытие университета
 function openUniversity(id) {
     const uni = universities.find(u => u.id === id);
     currentUniversity = uni;
@@ -45,21 +48,27 @@ function openUniversity(id) {
     document.getElementById("uni-admission").innerText = uni.admission;
     document.getElementById("uni-international").innerText = uni.international;
 
+    // ссылка сайта
+    document.getElementById("uni-website-link").href = uni.website;
+
     showSection("university");
 }
 
+// Добавить в сравнение
 function addToCompare() {
     if (!compareList.includes(currentUniversity.id)) {
         compareList.push(currentUniversity.id);
-        alert("Добавлено в сравнение!");
+        alert("Добавлено!");
     }
 }
 
+// Удаление
 function deleteFromCompare(id) {
     compareList = compareList.filter(x => x !== id);
     updateComparison();
 }
 
+// Таблица сравнения
 function updateComparison() {
     const div = document.getElementById("compare-table");
 
@@ -71,48 +80,57 @@ function updateComparison() {
     const selected = universities.filter(u => compareList.includes(u.id));
 
     div.innerHTML = `
-    <table>
-        <tr>
-            <th>Параметр</th>
-            ${selected.map(u => `
-                <th>
-                    ${u.name}
-                    <button onclick="deleteFromCompare(${u.id})" class="delete-btn">×</button>
-                </th>`).join("")}
-        </tr>
+        <table>
+            <tr>
+                <th>Параметр</th>
+                ${selected.map(u =>
+                    `<th>${u.name}
+                        <button onclick="deleteFromCompare(${u.id})" class="delete-btn">×</button>
+                     </th>`
+                ).join("")}
+            </tr>
 
-        <tr>
-            <td>Программы</td>
-            ${selected.map(u => `
-                <td>${u.programs.map(p =>
-                    `<b>${p.level}:</b> ${p.list.join(", ")}`).join("<br>")}
-                </td>`).join("")}
-        </tr>
+            <tr>
+                <td>Программы</td>
+                ${selected.map(u =>
+                    `<td>${u.programs.map(p =>
+                        `<b>${p.level}:</b> ${p.list.join(", ")}`
+                    ).join("<br>")}</td>`
+                ).join("")}
+            </tr>
 
-        <tr>
-            <td>Стоимость</td>
-            ${selected.map(u => `
-                <td>
-                    Бакалавр: ${u.tuition.bachelor}<br>
-                    Магистр: ${u.tuition.master}<br>
-                    PhD: ${u.tuition.phd}
-                </td>`).join("")}
-        </tr>
+            <tr>
+                <td>Стоимость</td>
+                ${selected.map(u =>
+                    `<td>
+                        Бакалавр: ${u.tuition.bachelor}<br>
+                        Магистр: ${u.tuition.master}<br>
+                        PhD: ${u.tuition.phd}
+                    </td>`
+                ).join("")}
+            </tr>
 
-        <tr>
-            <td>Стипендии</td>
-            ${selected.map(u => `<td>${u.scholarships.join("<br>")}</td>`).join("")}
-        </tr>
+            <tr>
+                <td>Стипендии</td>
+                ${selected.map(u => `<td>${u.scholarships.join("<br>")}</td>`).join("")}
+            </tr>
 
-        <tr>
-            <td>Поступление</td>
-            ${selected.map(u => `<td>${u.admission}</td>`).join("")}
-        </tr>
+            <tr>
+                <td>Поступление</td>
+                ${selected.map(u => `<td>${u.admission}</td>`).join("")}
+            </tr>
 
-        <tr>
-            <td>Международное сотрудничество</td>
-            ${selected.map(u => `<td>${u.international}</td>`).join("")}
-        </tr>
-    </table>
+            <tr>
+                <td>Международное</td>
+                ${selected.map(u => `<td>${u.international}</td>`).join("")}
+            </tr>
+
+            <tr>
+                <td>Сайт</td>
+                ${selected.map(u =>
+                    `<td><a href="${u.website}" class="website-btn" target="_blank">🌐 Перейти</a></td>`
+                ).join("")}
+            </tr>
+        </table>
     `;
 }
